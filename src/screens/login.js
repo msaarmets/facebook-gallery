@@ -14,11 +14,11 @@ class LoginPage extends React.Component {
         this.responseFacebook = this.responseFacebook.bind(this);
     }
     async responseFacebook(response) {
-        console.log(response);
-        Cookies.set("userID", response.userID);
+        console.log("responseFacebook:", response);
 
-        if (isLoggedIn()) {
+        if (isLoggedIn() === true) {
             this.setState({ toAlbums: true })
+            Cookies.set("userID", response.userID);
         }
 
     }
@@ -35,7 +35,7 @@ class LoginPage extends React.Component {
     );
 
     componentDidMount() {
-        if (isLoggedIn()) {
+        if (isLoggedIn() === true) {
             this.setState({ toAlbums: true })
         }
     }
