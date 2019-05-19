@@ -6,6 +6,7 @@ import FacebookLogout from './components/logout/logout';
 import Loader from './components/loader/Loader';
 import './App.css';
 import config from './config.json';
+import './i18n/i18n';
 
 function Login() {
   return <LoginPage />

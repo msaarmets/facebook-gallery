@@ -1,14 +1,20 @@
 import React from 'react';
-import { facebookLogout } from '../../helpers/helpers';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { withTranslation } from 'react-i18next';
 import './userInfo.css';
 import Cookies from 'js-cookie';
-import FacebookLogout from '../logout/logout';
 
-const UserInfoBlock = () => {
+const UserInfoBlock = (props) => {
+    const t = props.t;
+    const changeLanguage = lang => { props.i18n.changeLanguage(lang) };
     return (
-        <p>{`Hello, ${Cookies.get("userName")}!`} <Link to="/logout/">Logout</Link></p>
+        <div className="d-flex justify-content-between mx-5">
+            <div>{`${t('hello')}, ${Cookies.get("userName")}!`} <Link to="/logout/">{t('logout')}</Link></div>
+            <div>
+                <span id="language-selector"><a href="javascript:void(0)" onClick={() => changeLanguage('en')}>EN</a>/<a href="javascript:void(0)" onClick={() => changeLanguage('et')}>ET</a></span>
+            </div >
+        </div>
     )
 }
 
-export default withRouter(UserInfoBlock);
+export default withTranslation()(UserInfoBlock);
