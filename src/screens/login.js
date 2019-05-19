@@ -16,9 +16,10 @@ class LoginPage extends React.Component {
     async responseFacebook(response) {
         console.log("responseFacebook:", response);
 
-        if (isLoggedIn() === true) {
+        if (await isLoggedIn() === true) {
             this.setState({ toAlbums: true })
-            Cookies.set("userID", response.userID);
+            Cookies.set("userID", response.userID, { expires: 7, path: '' });
+            Cookies.set("userName", response.name, { expires: 7, path: '' });
         }
 
     }
@@ -49,7 +50,7 @@ class LoginPage extends React.Component {
                     appId={config.fbID}
                     autoLoad={true}
                     fields="name,email,picture"
-                    scope="user_photos"
+                    scope="public_profile, user_photos"
                     callback={this.responseFacebook}
                     version="3.3"
                     redirectUri="/albums"

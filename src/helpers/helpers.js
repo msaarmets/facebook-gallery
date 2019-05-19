@@ -21,16 +21,5 @@ export async function isLoggedIn() {
 
 }
 
-export function facebookLogout() {
-    window.FB.getLoginStatus(function (response) {
-        if (response.status === 'connected') {
-            window.FB.logout(function (response) {
-                console.log(response);
-                return true;
-            });
-        }
-    });
-}
-
 
 

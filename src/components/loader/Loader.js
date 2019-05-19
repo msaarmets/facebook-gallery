@@ -5,7 +5,7 @@ const Loader = () => {
     return (
         <div className="container-fluid">
             <div className="row">
-                <div className="col-12">
+                <div id="spinner" className="col-12 d-flex justify-content-center align-items-center">
                     <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
                 </div>
             </div>

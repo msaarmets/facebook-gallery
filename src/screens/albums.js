@@ -1,6 +1,7 @@
 import React from 'react';
-import { PrivateRoute, isLoggedIn } from '../helpers/helpers';
+import { isLoggedIn } from '../helpers/helpers';
 import { Redirect } from 'react-router-dom';
+import UserInfoBlock from '../components/userInfo/userInfo';
 
 class AlbumsPage extends React.Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class AlbumsPage extends React.Component {
             return <Redirect to="/login/" />
         }
         return (
-            <h1>Albums</h1>
+            <UserInfoBlock />
         )
     }
 }

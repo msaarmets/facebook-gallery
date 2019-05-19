@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import { facebookLogout } from './helpers/helpers';
 import LoginPage from './screens/login';
 import AlbumsPage from './screens/albums';
+import FacebookLogout from './components/logout/logout';
 import Loader from './components/loader/Loader';
 import './App.css';
 import config from './config.json';
@@ -12,6 +12,9 @@ function Login() {
 }
 function Albums() {
   return <AlbumsPage />
+}
+function Logout() {
+  return <FacebookLogout />
 }
 
 
@@ -69,7 +72,7 @@ class App extends React.Component {
                 <Link to="/albums/">Albums</Link>
               </li>
               <li>
-                <button onClick={() => facebookLogout()}>Log out</button>
+                <Link to="/logout/">Log out</Link>
               </li>
             </ul>
           </nav>
@@ -77,6 +80,7 @@ class App extends React.Component {
             <Route path="/" exact component={Loader} />
             <Route path="/login/" component={Login} />
             <Route path="/albums/" component={Albums} />
+            <Route path="/logout/" component={Logout} />
           </Switch>
         </div>
       </Router >
