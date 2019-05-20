@@ -1,0 +1,25 @@
+div.card {
+    width: 200px;
+    height: 250px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+
+}
+
+div.card-img {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+div.card-title {
+    position: relative;
+    bottom: -9px;
+    text-decoration: none;
+    color: black;
+    margin: 0;
+}
+
+div.card-title:hover {
+    text-decoration: none;
+}

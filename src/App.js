@@ -65,7 +65,7 @@ class App extends React.Component {
     return (
       <Router>
         <div className="container">
-          <div className="row">
+          <div className="row d-none">
             <div className="col-12">
               <nav>
                 <ul>
@@ -88,7 +88,7 @@ class App extends React.Component {
           <div className="row">
             <div className="col-12">
               <Switch>
-                <Route path="/" exact component={Loader} />
+                <Route path="/" exact component={Albums} />
                 <Route path="/login/" component={Login} />
                 <Route path="/albums/" exact component={Albums} />
                 <Route path="/album/:id" component={Album} />

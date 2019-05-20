@@ -1,8 +1,8 @@
 import React from 'react';
 import { isLoggedIn, getAlbums } from '../helpers/helpers';
 import { Redirect } from 'react-router-dom';
+import { withTranslation } from 'react-i18next';
 import UserInfoBlock from '../components/userInfo/userInfo';
-import Cookies from 'js-cookie';
 import Loader from '../components/loader/Loader';
 import AlbumCover from '../components/album/albumCover';
 
@@ -48,13 +48,19 @@ class AlbumsPage extends React.Component {
         return (
             <>
                 <UserInfoBlock />
-                {Object.keys(this.state.albums).map(el => {
-                    const id = this.state.albums[el].id;
-                    return <AlbumCover album={this.state.albums[el]} key={`${el.id}${el}`} />
-                })}
+                <div className="row">
+                    <div className="col-12">
+                        <div className="display-3">{this.props.t('your_albums')}</div>
+                    </div>
+                </div>
+                <div className="row my-5">
+                    {Object.keys(this.state.albums).map(el => {
+                        return <AlbumCover album={this.state.albums[el]} key={`${el.id}${el}`} />
+                    })}
+                </div>
             </>
         )
     }
 }
 
-export default AlbumsPage;
+export default withTranslation()(AlbumsPage);
