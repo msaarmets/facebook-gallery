@@ -11,7 +11,7 @@ const UserInfoBlock = (props) => {
         <div className="d-flex justify-content-between mx-5">
             <div>{`${t('hello')}, ${Cookies.get("userName")}!`} <Link to="/logout/">{t('logout')}</Link></div>
             <div>
-                <span id="language-selector"><a href="javascript:void(0)" onClick={() => changeLanguage('en')}>EN</a>/<a href="javascript:void(0)" onClick={() => changeLanguage('et')}>ET</a></span>
+                <span id="language-selector"><a href="javascript:void(0)" onClick={() => changeLanguage('en')}>EN</a> | <a href="javascript:void(0)" onClick={() => changeLanguage('et')}>ET</a></span>
             </div >
         </div>
     )

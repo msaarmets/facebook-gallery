@@ -60,29 +60,37 @@ class App extends React.Component {
     }
     return (
       <Router>
-        <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/login/">Login</Link>
-              </li>
-              <li>
-                <Link to="/albums/">Albums</Link>
-              </li>
-              <li>
-                <Link to="/logout/">Log out</Link>
-              </li>
-            </ul>
-          </nav>
-          <Switch>
-            <Route path="/" exact component={Loader} />
-            <Route path="/login/" component={Login} />
-            <Route path="/albums/" component={Albums} />
-            <Route path="/logout/" component={Logout} />
-          </Switch>
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <nav>
+                <ul>
+                  <li>
+                    <Link to="/">Home</Link>
+                  </li>
+                  <li>
+                    <Link to="/login/">Login</Link>
+                  </li>
+                  <li>
+                    <Link to="/albums/">Albums</Link>
+                  </li>
+                  <li>
+                    <Link to="/logout/">Log out</Link>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-12">
+              <Switch>
+                <Route path="/" exact component={Loader} />
+                <Route path="/login/" component={Login} />
+                <Route path="/albums/" component={Albums} />
+                <Route path="/logout/" component={Logout} />
+              </Switch>
+            </div>
+          </div>
         </div>
       </Router >
     );

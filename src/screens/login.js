@@ -24,17 +24,6 @@ class LoginPage extends React.Component {
 
     }
 
-    /* make the API call */
-    getAlbums = (userID) => window.FB.api(
-        `/${userID}/albums`,
-        function (response) {
-            if (response && !response.error) {
-                /* handle the result */
-                console.log(response)
-            }
-        }
-    );
-
     componentDidMount() {
         if (isLoggedIn() === true) {
             this.setState({ toAlbums: true })
@@ -55,7 +44,6 @@ class LoginPage extends React.Component {
                     version="3.3"
                     redirectUri="/albums"
                 />
-                <button onClick={() => this.getAlbums(Cookies.get("userID"))}>Get albums</button>
             </>
         )
     }
