@@ -21,5 +21,57 @@ export async function isLoggedIn() {
     return false;
 }
 
+// Details of the album
+export async function getAlbum(albumID) {
+    return new Promise((resolve) => {
+        /* make the API call */
+        window.FB.api(
+            `/${albumID}/?fields=name, picture`,
+            {
+                "type": "album",
+                "redirect": "false"
+            },
+            function (response) {
+                if (response && !response.error) {
+                    /* handle the result */
+                    resolve(response);
+                }
+            }
+        )
+    });
+}
+
+// List of albums
+export async function getAlbums() {
+    return new Promise(async (resolve) => {
+        /* make the API call */
+        await window.FB.api(
+            `/me/albums?fields=picture,name`,
+            function (response) {
+                if (response && !response.error) {
+                    /* handle the result */
+                    console.log("getAlbums: ", response)
+                    resolve(response);
+                }
+            }
+        )
+    });
+}
+
+// Photos of the album
+export async function getPhotos(albumID) {
+    return new Promise(async (resolve) => {
+        await window.FB.api(
+            `/${albumID}/photos?fields=source, picture, width, height`,
+            function (response) {
+                if (response && !response.error) {
+                    /* handle the result */
+                    resolve(response);
+                }
+            }
+        )
+    });
+}
+
 
 

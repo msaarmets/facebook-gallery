@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import LoginPage from './screens/login';
 import AlbumsPage from './screens/albums';
+import AlbumPage from './screens/album';
 import FacebookLogout from './components/logout/logout';
 import Loader from './components/loader/Loader';
 import './App.css';
@@ -13,6 +14,9 @@ function Login() {
 }
 function Albums() {
   return <AlbumsPage />
+}
+function Album({ match }) {
+  return <AlbumPage albumID={match.params.id} />
 }
 function Logout() {
   return <FacebookLogout />
@@ -86,7 +90,8 @@ class App extends React.Component {
               <Switch>
                 <Route path="/" exact component={Loader} />
                 <Route path="/login/" component={Login} />
-                <Route path="/albums/" component={Albums} />
+                <Route path="/albums/" exact component={Albums} />
+                <Route path="/album/:id" component={Album} />
                 <Route path="/logout/" component={Logout} />
               </Switch>
             </div>

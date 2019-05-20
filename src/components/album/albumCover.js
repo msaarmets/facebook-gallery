@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const AlbumCover = (props) => {
     return (
         <div key={props.album.id}>
-            <img src={props.cover} alt={props.album.name}></img>
+            <Link to={`/album/${props.album.id}`}><img src={props.album.picture.data.url} alt={props.album.name}></img></Link>
             <p>{props.album.name}</p>
         </div>
     )
