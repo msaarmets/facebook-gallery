@@ -3,3 +3,13 @@
     text-decoration: underline;
     color: blue;
 }
+
+#header {
+    height: 50px;
+    width: 100%;
+    border-bottom: 1px solid gray;
+}
+
+.pointer {
+    cursor: pointer;
+}

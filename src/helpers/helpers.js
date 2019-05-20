@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react'; */
 import Cookies from 'js-cookie';
 
 async function getFBLoginStatus() {
@@ -6,18 +6,15 @@ async function getFBLoginStatus() {
         window.FB.getLoginStatus(function (response) {
             resolve(response);
         })
-
     })
 }
 
 export async function isLoggedIn() {
     const response = await getFBLoginStatus();
     if (response.status === "connected") {
-        console.log("isLoggedIn(): ", response.status === "connected")
         Cookies.set("accessToken", response.authResponse.accessToken, { expires: 7, path: '' });
         return true;
     }
-    console.log("isLoggedIn(): ", false)
     return false;
 }
 
@@ -49,8 +46,6 @@ export async function getAlbums() {
             `/me/albums?fields=picture,name`,
             function (response) {
                 if (response && !response.error) {
-                    /* handle the result */
-                    console.log("getAlbums: ", response)
                     resolve(response);
                 }
             }
@@ -65,7 +60,6 @@ export async function getPhotos(albumID) {
             `/${albumID}/photos?fields=source, picture, width, height`,
             function (response) {
                 if (response && !response.error) {
-                    /* handle the result */
                     resolve(response);
                 }
             }

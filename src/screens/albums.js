@@ -53,7 +53,7 @@ class AlbumsPage extends React.Component {
                         <div className="display-3">{this.props.t('your_albums')}</div>
                     </div>
                 </div>
-                <div className="row my-5">
+                <div className="row my-5 album-cards">
                     {Object.keys(this.state.albums).map(el => {
                         return <AlbumCover album={this.state.albums[el]} key={`${el.id}${el}`} />
                     })}

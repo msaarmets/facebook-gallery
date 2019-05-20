@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
 import { isLoggedIn } from '../../helpers/helpers';
 import Loader from '../loader/Loader';
+import Cookies from 'js-cookie';
 
 class FacebookLogout extends React.Component {
     constructor(props) {
@@ -16,6 +17,7 @@ class FacebookLogout extends React.Component {
             await window.FB.logout(function (response) {
                 console.log(response);
             })
+            Cookies.remove("userName");
             this.setState({ loaded: true });
         }
     }

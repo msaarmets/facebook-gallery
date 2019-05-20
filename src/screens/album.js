@@ -1,9 +1,10 @@
 import React from 'react';
 import { isLoggedIn, getPhotos, getAlbum } from '../helpers/helpers';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import UserInfoBlock from '../components/userInfo/userInfo';
 import Loader from '../components/loader/Loader';
 import Gallery from 'react-grid-gallery';
+import './albums.css';
 
 class AlbumPage extends React.Component {
     constructor(props) {
@@ -78,6 +79,11 @@ class AlbumPage extends React.Component {
                                     enableImageSelection={false}
                                 />
                             </div>
+                        </div>
+                    </div>
+                    <div className="row mt-5">
+                        <div className="col-12" id="back-btn">
+                            <Link to="/albums/"><span id="back" style={{ fontSize: "40px" }}>&#8617;</span></Link>
                         </div>
                     </div>
                 </>
