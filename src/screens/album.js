@@ -5,6 +5,7 @@ import UserInfoBlock from '../components/userInfo/userInfo';
 import Loader from '../components/loader/Loader';
 import Gallery from 'react-grid-gallery';
 import './albums.css';
+import { withTranslation } from 'react-i18next';
 
 class AlbumPage extends React.Component {
     constructor(props) {
@@ -15,20 +16,33 @@ class AlbumPage extends React.Component {
             photos: [],
             album: {}
         }
+        this.t = this.props.t;
     }
 
     async componentDidMount() {
 
-        if (await isLoggedIn() === true) {
-            const photos = await getPhotos(this.props.albumID);
-            const album = await getAlbum(this.props.albumID);
-            const photoArray = this.photosToArray(photos);
-            this.setState({ logged: true, loaded: true, photos: photoArray, album: album });
-        }
-        else {
-            this.setState({ loaded: true, logged: false });
-        }
+        try {
+            if (await isLoggedIn() === true) {
+                let album = {};
+                const photos = await getPhotos(this.props.albumID);
+                try {
+                    album = await getAlbum(this.props.albumID);
+                } catch (e) {
+                    (() => { this.props.addError(this.t("Error_getting_album")) })();
+                }
 
+                const photoArray = this.photosToArray(photos);
+                this.setState({ logged: true, loaded: true, photos: photoArray, album: album });
+            }
+            else {
+                this.props.addError(this.t("please_login"));
+                this.setState({ loaded: true, logged: false });
+            }
+        } catch (e) {
+            this.props.addError(this.t('fb_api_error'))
+            this.setState({ loaded: true, logged: false });
+
+        }
     }
 
     // Generate array of photos for Gallery component
@@ -77,6 +91,7 @@ class AlbumPage extends React.Component {
                                 <Gallery
                                     images={this.state.photos}
                                     enableImageSelection={false}
+                                    backdropClosesModal={true}
                                 />
                             </div>
                         </div>
@@ -104,4 +119,4 @@ class AlbumPage extends React.Component {
 
 
 
-export default AlbumPage;
+export default withTranslation()(AlbumPage);

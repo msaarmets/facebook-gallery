@@ -3,6 +3,7 @@ import { withRouter, Redirect } from 'react-router-dom';
 import { isLoggedIn } from '../../helpers/helpers';
 import Loader from '../loader/Loader';
 import Cookies from 'js-cookie';
+import { withTranslation } from 'react-i18next';
 
 class FacebookLogout extends React.Component {
     constructor(props) {
@@ -10,15 +11,20 @@ class FacebookLogout extends React.Component {
         this.state = {
             loaded: false
         }
+        this.t = this.props.t;
     }
     async componentDidMount() {
-        const loginStatus = await isLoggedIn();
-        if (loginStatus === true) {
-            await window.FB.logout(function (response) {
-                console.log(response);
-            })
-            Cookies.remove("userName");
-            this.setState({ loaded: true });
+        try {
+            const loginStatus = await isLoggedIn();
+            if (loginStatus === true) {
+                await window.FB.logout(function (response) {
+                    console.log(response);
+                })
+                Cookies.remove("userName");
+                this.setState({ loaded: true });
+            }
+        } catch (e) {
+            this.props.addError(this.t('fb_api_error'))
         }
     }
     render() {
@@ -31,4 +37,4 @@ class FacebookLogout extends React.Component {
     }
 }
 
-export default withRouter(FacebookLogout);
+export default withRouter(withTranslation()(FacebookLogout));

@@ -17,11 +17,21 @@ class AlbumsPage extends React.Component {
     }
 
     async componentDidMount() {
-        if (await isLoggedIn() === true) {
-            let albums = await getAlbums();
-            this.setState({ logged: true, loaded: true, albums: albums.data });
-        }
-        else {
+        try {
+            if (await isLoggedIn() === true) {
+                let albums = {};
+                try {
+                    albums = await getAlbums();
+                } catch (e) {
+                    this.props.addError("Error getting albums");
+                }
+                this.setState({ logged: true, loaded: true, albums: albums.data });
+            }
+            else {
+                this.setState({ loaded: true, logged: false });
+            }
+        } catch (e) {
+            this.props.addError(this.t('fb_api_error'))
             this.setState({ loaded: true, logged: false });
         }
 

@@ -1,5 +1,8 @@
 {
     "logout": "Logi välja",
     "hello": "Tere",
-    "your_albums": "Sinu albumid"
+    "your_albums": "Sinu albumid",
+    "Error_getting_album": "Viga albumi laadimisel",
+    "fb_api_error": "Viga Facebookiga ühendumisel",
+    "please_login": "Palun logi sisse!"
 }

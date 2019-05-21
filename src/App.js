@@ -9,30 +9,14 @@ import './App.css';
 import config from './config.json';
 import './i18n/i18n';
 import { history } from './helpers/history';
-
-function Login() {
-  history.push("/login/");
-  return <LoginPage />
-}
-function Albums() {
-  history.push("/albums/");
-  return <AlbumsPage />
-}
-function Album({ match }) {
-  history.push(`/album/${match.params.id}`);
-  return <AlbumPage albumID={match.params.id} />
-}
-function Logout() {
-  history.push("/logout/");
-  return <FacebookLogout />
-}
-
+import ErrorsBlock from './components/errors/errors';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loaded: false
+      loaded: false,
+      errors: []
     }
   }
 
@@ -62,6 +46,33 @@ class App extends React.Component {
     }(document, 'script', 'facebook-jssdk'));
   }
 
+  Login = () => {
+    history.push("/login/");
+    return <LoginPage addError={this.addError} />
+  }
+  Albums = () => {
+    history.push("/albums/");
+    return <AlbumsPage addError={this.addError} />
+  }
+  Album = ({ match }) => {
+    history.push(`/album/${match.params.id}`);
+    return <AlbumPage albumID={match.params.id} addError={this.addError} />
+  }
+  Logout = () => {
+    history.push("/logout/");
+    return <FacebookLogout addError={this.addError} />
+  }
+
+  addError = err => {
+    this.setState({ errors: [...this.state.errors, err] });
+  }
+
+  cleanErrors = () => {
+    if (this.state.errors.length > 0) {
+      this.setState({ errors: [] });
+
+    }
+  }
 
   render() {
     if (!this.state.loaded) {
@@ -90,14 +101,17 @@ class App extends React.Component {
               </nav>
             </div>
           </div>
+          {this.state.errors.length > 0 &&
+            <ErrorsBlock errors={this.state.errors} cleanErrors={this.cleanErrors}/>
+          }
           <div className="row">
             <div className="col-12">
               <Switch>
-                <Route path="/" exact component={Albums} />
-                <Route path="/login/" component={Login} />
-                <Route path="/albums/" exact component={Albums} />
-                <Route path="/album/:id" component={Album} />
-                <Route path="/logout/" component={Logout} />
+                <Route path="/" exact component={this.Albums} />
+                <Route path="/login/" component={this.Login} />
+                <Route path="/albums/" exact component={this.Albums} />
+                <Route path="/album/:id" component={this.Album} />
+                <Route path="/logout/" component={this.Logout} />
               </Switch>
             </div>
           </div>
