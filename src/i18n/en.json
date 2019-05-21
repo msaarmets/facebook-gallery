@@ -4,5 +4,6 @@
     "your_albums": "Your albums",
     "Error_getting_album": "Error getting album",
     "fb_api_error": "Error connecting Facebook API",
-    "please_login": "Please login!"
+    "please_login": "Please login!",
+    "invalid_url": "Invalid URL!"
 }

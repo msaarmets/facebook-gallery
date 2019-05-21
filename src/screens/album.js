@@ -39,7 +39,13 @@ class AlbumPage extends React.Component {
                 this.setState({ loaded: true, logged: false });
             }
         } catch (e) {
-            this.props.addError(this.t('fb_api_error'))
+            if (e === "Invalid URL") {
+                this.props.addError(this.t('invalid_url'))
+            }
+            else {
+                this.props.addError(this.t('fb_api_error'))
+            }
+
             this.setState({ loaded: true, logged: false });
 
         }

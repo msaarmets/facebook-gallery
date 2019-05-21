@@ -24,7 +24,7 @@ export async function isLoggedIn() {
         }
         return false;
     } catch (e) {
-        throw new Error("Error connectiong Facebook API")
+        throw new Error("Error connecting Facebook API")
     }
 }
 
@@ -44,6 +44,7 @@ export async function getAlbum(albumID) {
                     resolve(response);
                 }
                 else {
+                    console.log("response.error:", response.error)
                     reject("Error getting the album");
                 }
             }
@@ -79,7 +80,12 @@ export async function getPhotos(albumID) {
                     resolve(response);
                 }
                 else {
-                    reject("Error getting photos")
+                    if (response.error.code === 100) {
+                        reject("Invalid URL")
+                    }
+                    else {
+                        reject("Error getting photos")
+                    }
                 }
             }
         )
