@@ -66,6 +66,3 @@ export async function getPhotos(albumID) {
         )
     });
 }
-
-
-

@@ -4,37 +4,45 @@ import config from '../config';
 import Cookies from 'js-cookie';
 import { Redirect } from 'react-router';
 import { withRouter } from 'react-router-dom';
-
+import { history } from '../helpers/history';
 import { isLoggedIn } from '../helpers/helpers';
 
 class LoginPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { toAlbums: false };
+        this.state = {
+            toAlbums: false,
+            redirect: ""
+        };
 
         this.responseFacebook = this.responseFacebook.bind(this);
     }
     async responseFacebook(response) {
-        console.log("responseFacebook:", response);
 
         if (await isLoggedIn() === true) {
-            this.setState({ toAlbums: true })
             Cookies.set("userName", response.name, { expires: 7, path: '' });
+            // Check if user was visiting page anonymously and redirect back after login
+            if (history.length > 1 && history[history.length - 2] !== "/logout/") {
+                this.setState({ redirect: history[history.length - 2] })
+            }
+            else {
+                this.setState({ toAlbums: true })
+            }
         }
 
     }
 
     componentDidMount() {
         if (isLoggedIn() === true) {
-            if (this.props.history) {
-                this.props.history.goBack();
-            }
             this.setState({ toAlbums: true })
         }
     }
     render() {
         if (this.state.toAlbums === true) {
             return <Redirect to='/albums/' />
+        }
+        else if (this.state.redirect !== "") {
+            return <Redirect to={this.state.redirect} />
         }
         return (
             <>

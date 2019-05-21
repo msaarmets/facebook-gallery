@@ -8,17 +8,22 @@ import Loader from './components/loader/Loader';
 import './App.css';
 import config from './config.json';
 import './i18n/i18n';
+import { history } from './helpers/history';
 
 function Login() {
+  history.push("/login/");
   return <LoginPage />
 }
 function Albums() {
+  history.push("/albums/");
   return <AlbumsPage />
 }
 function Album({ match }) {
+  history.push(`/album/${match.params.id}`);
   return <AlbumPage albumID={match.params.id} />
 }
 function Logout() {
+  history.push("/logout/");
   return <FacebookLogout />
 }
 
